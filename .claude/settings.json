@@ -1,4 +1,19 @@
 {
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // \"\"' | { read -r f; [[ \"$f\" == *.rb ]] && make format || true; }",
+            "timeout": 60,
+            "statusMessage": "RuboCop: 自動修正中..."
+          }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
       "Bash(docker-compose build *)",
