@@ -1,0 +1,40 @@
+# Rails
+*.rbc
+capybara-*.html
+.rspec
+/public/system
+/coverage/
+/spec/tmp
+*.orig
+rerun.txt
+pickle-email-*.html
+config/initializers/secret_token.rb
+config/master.key
+config/credentials/*.key
+
+# Dotenv
+/.env
+/.env.*
+!/.env.example
+
+# Assets / Node
+/public/assets
+node_modules/
+/tmp/cache/assets/development/*
+/tmp/cache/assets/test/*
+/tmp/cache/assets/production/*
+/tmp/pids/*
+!tmp/pids/.keep
+
+# Storage
+/storage/*
+!/storage/.keep
+
+# Docker
+.dockerignore
+
+# Bundler
+.bundle
+
+# macOS
+.DS_Store
