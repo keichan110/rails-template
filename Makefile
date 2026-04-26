@@ -17,6 +17,9 @@ setup: ## 初回セットアップ（ビルド → rails new → マイグレー
 	docker-compose build
 	$(DOCKER_RUN) bin/rails db:migrate
 	@[ -f .env ] || cp .env.example .env
+	git init --initial-branch=main
+	git add .
+	git commit -m "Initial commit"
 
 up: ## Railsサーバーを起動
 	docker-compose up
