@@ -1,15 +1,13 @@
 .DEFAULT_GOAL := help
 DOCKER_RUN := docker-compose run --rm app
 
-.PHONY: help build rails-new setup up down console migrate rollback routes test lint format logs shell
+.PHONY: help setup up down console migrate rollback routes test lint format logs shell
 
 help: ## コマンド一覧を表示
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-build: ## Dockerイメージをビルド
+setup: ## 初回セットアップ（ビルド → rails new → マイグレーション → .env生成）
 	docker-compose build
-
-rails-new: build ## Railsアプリを生成 (初回セットアップ)
 	$(DOCKER_RUN) rails new . \
 		--database=postgresql \
 		--asset-pipeline=propshaft \
@@ -17,8 +15,8 @@ rails-new: build ## Railsアプリを生成 (初回セットアップ)
 		--template=template.rb \
 		--force
 	docker-compose build
-
-setup: rails-new migrate ## rails-new + migrate を実行
+	$(DOCKER_RUN) bin/rails db:migrate
+	@[ -f .env ] || cp .env.example .env
 
 up: ## Railsサーバーを起動
 	docker-compose up

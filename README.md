@@ -47,17 +47,19 @@ git clone https://github.com/<your-username>/rails-template.git my-app
 cd my-app
 ```
 
-### 2. Railsアプリを生成
+### 2. セットアップ
 
 ```bash
-make rails-new
+make setup
 ```
 
 このコマンドで以下が実行されます:
 - Dockerイメージのビルド（Ruby 4.0 系最新）
 - `rails new .` の実行（`template.rb` が自動適用される）
-- RSpec / FactoryBot / Faker のインストールと初期設定
+- RSpec / FactoryBot / Faker / RuboCop / Bullet のインストールと初期設定
 - Gemfileが更新された後に再ビルド
+- DBマイグレーション
+- `.env.example` を `.env` としてコピー
 
 ### 3. 開発サーバーを起動
 
@@ -71,9 +73,7 @@ http://localhost:3000 にアクセスして確認してください。
 
 ```bash
 make help        # コマンド一覧を表示
-make build       # Dockerイメージをビルド
-make rails-new   # Railsアプリを生成（初回のみ）
-make setup       # rails-new + migrate を一括実行
+make setup       # 初回セットアップ
 make up          # 開発サーバーを起動
 make down        # コンテナを停止
 make console     # Railsコンソールを起動
