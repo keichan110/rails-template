@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 DOCKER_RUN := docker-compose run --rm app
 
-.PHONY: help build rails-new setup up down console migrate rollback routes test logs shell
+.PHONY: help build rails-new setup up down console migrate rollback routes rspec logs shell
 
 help: ## コマンド一覧を表示
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -14,6 +14,7 @@ rails-new: build ## Railsアプリを生成 (初回セットアップ)
 		--database=postgresql \
 		--asset-pipeline=propshaft \
 		--javascript=importmap \
+		--template=template.rb \
 		--force
 	docker-compose build
 
@@ -37,8 +38,8 @@ rollback: ## マイグレーションをロールバック
 routes: ## ルーティング一覧を表示
 	$(DOCKER_RUN) bin/rails routes
 
-test: ## テストを実行
-	$(DOCKER_RUN) bin/rails test
+rspec: ## RSpecを実行
+	$(DOCKER_RUN) bundle exec rspec
 
 logs: ## ログを表示
 	docker-compose logs -f

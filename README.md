@@ -55,7 +55,8 @@ make rails-new
 
 このコマンドで以下が実行されます:
 - Dockerイメージのビルド（Ruby 4.0 系最新）
-- `rails new .` の実行
+- `rails new .` の実行（`template.rb` が自動適用される）
+- RSpec / FactoryBot / Faker のインストールと初期設定
 - Gemfileが更新された後に再ビルド
 
 ### 3. 開発サーバーを起動
@@ -79,7 +80,7 @@ make console     # Railsコンソールを起動
 make migrate     # DBマイグレーションを実行
 make rollback    # マイグレーションをロールバック
 make routes      # ルーティング一覧を表示
-make test        # テストを実行
+make rspec       # RSpecを実行
 make logs        # ログを表示
 make shell       # コンテナ内シェルを起動
 make bundle      # bundle install を実行
@@ -98,7 +99,8 @@ rails-template/
 ├── Dockerfile
 ├── Gemfile                # rails new 実行後に上書きされます
 ├── Makefile
-└── README.md
+├── README.md
+└── template.rb            # rails new 後に自動適用されるセットアップスクリプト
 ```
 
 ## ライセンス
