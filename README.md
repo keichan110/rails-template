@@ -80,7 +80,9 @@ make console     # Railsコンソールを起動
 make migrate     # DBマイグレーションを実行
 make rollback    # マイグレーションをロールバック
 make routes      # ルーティング一覧を表示
-make rspec       # RSpecを実行
+make test        # テストを実行
+make lint        # RuboCopでコードをチェック
+make format      # RuboCopで自動修正
 make logs        # ログを表示
 make shell       # コンテナ内シェルを起動
 make bundle      # bundle install を実行

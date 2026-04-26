@@ -4,6 +4,10 @@ gem_group :development, :test do
   gem "faker"
 end
 
+gem_group :development do
+  gem "rubocop-rails-omakase", require: false
+end
+
 after_bundle do
   generate "rspec:install"
 
@@ -17,4 +21,10 @@ after_bundle do
 
   # factoriesディレクトリを作成
   empty_directory "spec/factories"
+
+  # .rubocop.ymlを生成
+  create_file ".rubocop.yml", <<~YAML
+    inherit_gem:
+      rubocop-rails-omakase: rubocop.yml
+  YAML
 end
