@@ -104,7 +104,3 @@ rails-template/
 ├── README.md
 └── template.rb            # rails new 後に自動適用されるセットアップスクリプト
 ```
-
-## ライセンス
-
-MIT
